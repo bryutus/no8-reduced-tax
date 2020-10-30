@@ -7,10 +7,12 @@ import pandas as pd
 
 from . import products
 
+SUMMARIZED_SOURCE_FILE = 'resources/r_by_customer.csv'
+SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
+
 
 def main():
-    filepath = 'resources/r_by_customer.csv'
-    handle(filepath)
+    handle(SUMMARIZED_SOURCE_FILE)
 
 
 def handle(filepath):
@@ -20,13 +22,8 @@ def handle(filepath):
                      names=['name', 'retail_amount'],
                      skipinitialspace=True)
 
-    is_counting = False
-    bc_name = ''
-    cosmetics_amount = 0
-    supplement_amount = 0
-    promotion_amount = 0
-
-    summarized = list()
+    body = []
+    is_counting, summarized = reset_summarized()
 
     df.dropna(how='all')
     for index, row in df.iterrows():
@@ -34,56 +31,32 @@ def handle(filepath):
             continue
 
         if is_counting is False:
-            bc_name = row['name']
             is_counting = True
+            summarized['name'] = row['name']
             continue
 
         if row['name'] == '【  得意先計  】':
-            calculated_total_retail_amount = cosmetics_amount + \
-                supplement_amount + promotion_amount
-            row_total_retail_price = number_unformat(row['retail_amount'])
-            if calculated_total_retail_amount != row_total_retail_price:
-                raise Exception('合計金額が一致しません BC: {name}, 上代金額（計算）: {calculated_total_retail_amount}, 上代金額（ファイル）: {row_total_retail_price}'
-                                .format(name=bc_name,
-                                        calculated_total_retail_amount=calculated_total_retail_amount,
-                                        row_total_retail_price=row_total_retail_price))
+            validate_total_amount(summarized, row['retail_amount'])
+            body = add_body(body, summarized)
 
-            bc = parse_bc(bc_name)
-            summarized.append([bc.group(1),
-                               bc.group(2),
-                               cosmetics_amount,
-                               supplement_amount,
-                               promotion_amount])
-
-            is_counting = False
-            bc_name = ''
-            cosmetics_amount = 0
-            supplement_amount = 0
-            promotion_amount = 0
+            is_counting, summarized = reset_summarized()
             continue
 
         product_code = extract_product_code(row['name'])
-        if product_code not in products.SCHEME:
-            raise Exception(
-                '商品マスタに存在しない商品の売上が計上されています 商品コード: {product_code}'.format(
-                    product_code=product_code))
+        validate_exists_product(product_code)
 
         product = products.SCHEME[product_code]
+        summarized = sumup(summarized, product['type'], row['retail_amount'])
 
-        row['subed_retail_amount'] = number_unformat(row['retail_amount'])
+    write_csv(body)
 
-        if product['type'] == 'cosmetics':
-            cosmetics_amount += row['subed_retail_amount']
-        elif product['type'] == 'supplement':
-            supplement_amount += row['subed_retail_amount']
-        elif product['type'] == 'promotion':
-            promotion_amount += row['subed_retail_amount']
-        else:
-            raise Exception(
-                '定義されていない種別が存在しています 商品コード: {product_code}, 種別: {type}'.format(
-                    product_code=product_code, type=product['type']))
 
-    write_csv(summarized)
+def reset_summarized():
+    skeleton = {
+        'name': '',
+        'amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, }
+    }
+    return (False, skeleton)
 
 
 def is_ignore_row(name):
@@ -91,11 +64,24 @@ def is_ignore_row(name):
                     name)
 
 
-def parse_bc(bc):
-    matched = re.match('^([0-9]+)\\s(.+)', bc)
-    if matched is None:
-        return ''
-    return matched
+def number_unformat(price):
+    return int(re.sub('[^0-9\\-]', '', price))
+
+
+def sumup(summarized, type, retail_amount):
+    unformated_retail_amount = number_unformat(retail_amount)
+
+    if type == 'cosmetics':
+        summarized['amount']['cosmetics'] += unformated_retail_amount
+    elif type == 'supplement':
+        summarized['amount']['supplement'] += unformated_retail_amount
+    elif type == 'promotion':
+        summarized['amount']['promotion'] += unformated_retail_amount
+    else:
+        raise Exception(
+            '定義されていない種別が存在しています 種別: {type}'.format(type=type))
+
+    return summarized
 
 
 def extract_product_code(name):
@@ -105,12 +91,51 @@ def extract_product_code(name):
     return matched.group(1)
 
 
-def number_unformat(price):
-    return int(re.sub('[^0-9\\-]', '', price))
+def validate_exists_product(code):
+    if code not in products.SCHEME:
+        raise Exception(
+            '商品マスタに存在しない商品の売上が計上されています 商品コード: {product_code}'.format(
+                product_code=code))
+
+
+def validate_total_amount(summarized, row_amount):
+    calculated_amount = total_amount(summarized['amount'])
+    row_amount = number_unformat(row_amount)
+    if calculated_amount != row_amount:
+        raise Exception('合計金額が一致しません BC: {name}, '
+                        '上代金額（計算）: {calculated_amount}, '
+                        '上代金額（ファイル）: {row_amount}'
+                        .format(name=summarized['name'],
+                                calculated_amount=calculated_amount,
+                                row_amount=row_amount))
+
+
+def total_amount(amount):
+    total = 0
+    for v in amount.values():
+        total += v
+    return total
+
+
+def add_body(body, summarized):
+    bc = parse_bc(summarized['name'])
+    body.append([bc.group(1),
+                 bc.group(2),
+                 summarized['amount']['cosmetics'],
+                 summarized['amount']['supplement'],
+                 summarized['amount']['promotion']])
+    return body
+
+
+def parse_bc(bc):
+    matched = re.match('^([0-9]+)\\s(.+)', bc)
+    if matched is None:
+        return ''
+    return matched
 
 
 def write_csv(body):
-    with open('resources/summarized_r_by_customer.csv', 'w') as f:
+    with open(SUMMARIZED_FILE, 'w') as f:
         header = ['得意先コード', '得意先名', '化粧品', '健食', '販促']
         writer = csv.writer(f)
         writer.writerow(header)
