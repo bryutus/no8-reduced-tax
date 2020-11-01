@@ -122,8 +122,7 @@ def add_body(body, summarized):
     body.append([bc.group(1),
                  bc.group(2),
                  summarized['amount']['cosmetics'],
-                 summarized['amount']['supplement'],
-                 summarized['amount']['promotion']])
+                 summarized['amount']['supplement']])
     return body
 
 
@@ -136,7 +135,7 @@ def parse_bc(bc):
 
 def write_csv(body):
     with open(SUMMARIZED_FILE, 'w') as f:
-        header = ['得意先コード', '得意先名', '化粧品', '健食', '販促']
+        header = ['得意先コード', '得意先名', '化粧品', '健食']
         writer = csv.writer(f)
         writer.writerow(header)
         writer.writerows(body)
