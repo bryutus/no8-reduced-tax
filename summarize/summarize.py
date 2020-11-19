@@ -60,6 +60,9 @@ def reset_summarized():
 
 
 def is_ignore_row(name):
+    if pd.isnull(name):
+        return name
+
     return re.match('^[期間\\s.+|得意先コード 得意先名|商品コード 商品名]|【  合  計  】',
                     name)
 
