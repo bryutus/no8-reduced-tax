@@ -353,4 +353,5 @@ SCHEME = {
     '389959': {'name': '泡立てネット', 'type': 'promotion'},
     '402917': {'name': '泡立てボウル', 'type': 'promotion'},
     '2467': {'name': '名刺台紙', 'type': 'promotion'},
+    '432089': {'name': 'アルソアカレンダー2021(壁掛け', 'type': 'promotion'},
 }
