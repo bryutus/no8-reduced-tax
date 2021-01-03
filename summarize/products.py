@@ -357,4 +357,7 @@ SCHEME = {
     '432097': {'name': '2021カレンダー卓上', 'type': 'promotion'},
     '434910': {'name': 'ダイアリー2021(パープル)', 'type': 'promotion'},
     '434902': {'name': 'ダイアリー2021(ネイビー)', 'type': 'promotion'},
+    '434944': {'name': '年賀状2021', 'type': 'promotion'},
+    '435942': {'name': '柔らかハンカチタオル(ピンク)', 'type': 'promotion'},
+    '435950': {'name': '柔らかハンカチタオル(サックスブル', 'type': 'promotion'},
 }
