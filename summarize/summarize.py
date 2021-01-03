@@ -124,8 +124,8 @@ def add_body(body, summarized):
     bc = parse_bc(summarized['name'])
     body.append([bc.group(1),
                  bc.group(2),
-                 summarized['amount']['cosmetics'],
-                 summarized['amount']['supplement']])
+                 "{:,}".format(summarized['amount']['cosmetics']),
+                 "{:,}".format(summarized['amount']['supplement'])])
     return body
 
 
