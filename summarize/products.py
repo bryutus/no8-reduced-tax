@@ -360,4 +360,6 @@ SCHEME = {
     '434944': {'name': '年賀状2021', 'type': 'promotion'},
     '435942': {'name': '柔らかハンカチタオル(ピンク)', 'type': 'promotion'},
     '435950': {'name': '柔らかハンカチタオル(サックスブル', 'type': 'promotion'},
+    '430': {'name': 'リベストリップコート(NEW)', 'type': 'cosmetics'},
+    '975': {'name': 'アルソアポイントファンデーション', 'type': 'cosmetics'},
 }
