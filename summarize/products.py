@@ -362,4 +362,5 @@ SCHEME = {
     '435950': {'name': '柔らかハンカチタオル(サックスブル', 'type': 'promotion'},
     '430': {'name': 'リベストリップコート(NEW)', 'type': 'cosmetics'},
     '975': {'name': 'アルソアポイントファンデーション', 'type': 'cosmetics'},
+    '16': {'name': 'SPプレペアNEW', 'type': 'cosmetics'},
 }
