@@ -23,6 +23,7 @@ def handle(filepath):
                      skipinitialspace=True)
 
     body = []
+    total = {'cosmetics': 0, 'supplement': 0, 'promotion': 0, }
     is_counting, summarized = reset_summarized()
 
     df.dropna(how='all')
@@ -38,6 +39,7 @@ def handle(filepath):
         if row['name'] == '【  得意先計  】':
             validate_total_amount(summarized, row['retail_amount'])
             body = add_body(body, summarized)
+            total = sum_total(total, summarized['amount'])
 
             is_counting, summarized = reset_summarized()
             continue
@@ -48,7 +50,7 @@ def handle(filepath):
         product = products.SCHEME[product_code]
         summarized = sumup(summarized, product['type'], row['retail_amount'])
 
-    write_csv(body)
+    write_csv(body, total)
 
 
 def reset_summarized():
@@ -125,7 +127,8 @@ def add_body(body, summarized):
     body.append([bc.group(1),
                  bc.group(2),
                  "{:,}".format(summarized['amount']['cosmetics']),
-                 "{:,}".format(summarized['amount']['supplement'])])
+                 "{:,}".format(summarized['amount']['supplement']),
+                 "{:,}".format(summarized['amount']['cosmetics'] + summarized['amount']['supplement'])])
     return body
 
 
@@ -136,9 +139,24 @@ def parse_bc(bc):
     return matched
 
 
-def write_csv(body):
+def sum_total(total, amount):
+    total['cosmetics'] += amount['cosmetics']
+    total['supplement'] += amount['supplement']
+    total['promotion'] += amount['promotion']
+
+    return total
+
+
+def write_csv(body, total):
     with open(SUMMARIZED_FILE, 'w') as f:
-        header = ['得意先コード', '得意先名', '化粧品', '健食']
+        header = ['得意先コード', '得意先名', '化粧品', '健食', '合計']
+        footer = [
+            '',
+            '合計',
+            "{:,}".format(total['cosmetics']),
+            "{:,}".format(total['supplement']),
+            "{:,}".format(total['cosmetics'] + total['supplement'])]
         writer = csv.writer(f)
         writer.writerow(header)
         writer.writerows(body)
+        writer.writerow(footer)
