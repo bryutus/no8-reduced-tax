@@ -363,6 +363,6 @@ SCHEME = {
     '430': {'name': 'リベストリップコート(NEW)', 'type': 'cosmetics'},
     '975': {'name': 'アルソアポイントファンデーション', 'type': 'cosmetics'},
     '16': {'name': 'SPプレペアNEW', 'type': 'cosmetics'},
-    '437360': {'name': 'アルソア エム―スキット', 'type': 'cosmetics'},
-    '273201': {'name': '眉カットハサミ', 'type': 'cosmetics'},
+    '437360': {'name': 'アルソア エム―スキット', 'type': 'promotion'},
+    '273201': {'name': '眉カットハサミ', 'type': 'promotion'},
 }
