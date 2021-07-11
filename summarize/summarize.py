@@ -27,13 +27,14 @@ def handle(filepath):
         'cosmetics': 0,
         'supplement': 0,
         'promotion': 0,
-        '85': 0,
-        '156': 0,
-        '157': 0,
-        '158': 0,
-        '914': 0,
-        '915': 0,
-        '916': 0,
+        'georina': 0,
+        'soap': 0,
+        'pack': 0,
+        'lotion': 0,
+        'big_lotion': 0,
+        'essence': 0,
+        'set3': 0,
+        'best4': 0,
     }
     is_counting, summarized = reset_summarized()
 
@@ -73,8 +74,9 @@ def reset_summarized():
     skeleton = {
         'name': '',
         'amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
-        'quantity': {'85': 0, '156': 0, '157': 0, '158': 0, '914': 0, '915': 0, '916': 0, },
+        'quantity': {'georina': 0, 'soap': 0, 'pack': 0, 'lotion': 0, 'big_lotion': 0, 'essence': 0, 'set3': 0, 'best4': 0, },
     }
+
     return (False, skeleton)
 
 
@@ -108,19 +110,21 @@ def sumup(summarized, type, retail_amount):
 
 def sumup_quantity(summarized, code, quantity):
     if code == '85':
-        summarized['quantity']['85'] += quantity
-    elif code == '156':
-        summarized['quantity']['156'] += quantity
-    elif code == '157':
-        summarized['quantity']['157'] += quantity
-    elif code == '158':
-        summarized['quantity']['158'] += quantity
-    elif code == '914':
-        summarized['quantity']['914'] += quantity
-    elif code == '915':
-        summarized['quantity']['915'] += quantity
-    elif code == '916':
-        summarized['quantity']['916'] += quantity
+        summarized['quantity']['georina'] += quantity
+    elif code == '1120':
+        summarized['quantity']['soap'] += quantity
+    elif code == '1130':
+        summarized['quantity']['pack'] += quantity
+    elif code in ['1121', '1131', '1141', '49', ]:
+        summarized['quantity']['lotion'] += quantity
+    elif code in ['917', '918', '919', ]:
+        summarized['quantity']['big_lotion'] += quantity
+    elif code in ['1124', '1134', '1144', '50', ]:
+        summarized['quantity']['essence'] += quantity
+    elif code in ['156', '157', '158', ]:
+        summarized['quantity']['set3'] += quantity
+    elif code in ['914', '915', '916', ]:
+        summarized['quantity']['best4'] += quantity
 
     return summarized
 
@@ -166,13 +170,15 @@ def add_body(body, summarized):
                  "{:,}".format(summarized['amount']['supplement']),
                  "{:,}".format(
         summarized['amount']['cosmetics'] + summarized['amount']['supplement']),
-        summarized['quantity']['85'] if summarized['quantity']['85'] != 0 else '',
-        summarized['quantity']['156'] if summarized['quantity']['156'] != 0 else '',
-        summarized['quantity']['157'] if summarized['quantity']['157'] != 0 else '',
-        summarized['quantity']['158'] if summarized['quantity']['158'] != 0 else '',
-        summarized['quantity']['914'] if summarized['quantity']['914'] != 0 else '',
-        summarized['quantity']['915'] if summarized['quantity']['915'] != 0 else '',
-        summarized['quantity']['916'] if summarized['quantity']['916'] != 0 else ''])
+        summarized['quantity']['georina'] if summarized['quantity']['georina'] != 0 else '',
+        summarized['quantity']['soap'] if summarized['quantity']['soap'] != 0 else '',
+        summarized['quantity']['pack'] if summarized['quantity']['pack'] != 0 else '',
+        summarized['quantity']['lotion'] if summarized['quantity']['lotion'] != 0 else '',
+        summarized['quantity']['big_lotion'] if summarized['quantity']['big_lotion'] != 0 else '',
+        summarized['quantity']['essence'] if summarized['quantity']['essence'] != 0 else '',
+        summarized['quantity']['set3'] if summarized['quantity']['set3'] != 0 else '',
+        summarized['quantity']['best4'] if summarized['quantity']['best4'] != 0 else '',
+    ])
 
     return body
 
@@ -188,13 +194,14 @@ def sum_total(total, amount, quantity):
     total['cosmetics'] += amount['cosmetics']
     total['supplement'] += amount['supplement']
     total['promotion'] += amount['promotion']
-    total['85'] += quantity['85']
-    total['156'] += quantity['156']
-    total['157'] += quantity['157']
-    total['158'] += quantity['158']
-    total['914'] += quantity['914']
-    total['915'] += quantity['915']
-    total['916'] += quantity['916']
+    total['georina'] += quantity['georina']
+    total['soap'] += quantity['soap']
+    total['pack'] += quantity['pack']
+    total['lotion'] += quantity['lotion']
+    total['big_lotion'] += quantity['big_lotion']
+    total['essence'] += quantity['essence']
+    total['set3'] += quantity['set3']
+    total['best4'] += quantity['best4']
 
     return total
 
@@ -207,13 +214,14 @@ def write_csv(body, total):
             '化粧品',
             '健食',
             '合計',
-            '85 酵素',
-            '156 セット3 I',
-            '157 セット3 II',
-            '158 セット3 セル',
-            '914 ベスト4アルソアセットI',
-            '915 ベスト4アルソアセットII',
-            '916 ベスト4アルソアセットCELL',
+            '酵素',
+            '石鹸',
+            'パック',
+            'ローション',
+            'ビッグローション',
+            'エッセンス',
+            'セット3',
+            'ベスト4',
         ]
         footer = [
             '',
@@ -221,13 +229,14 @@ def write_csv(body, total):
             "{:,}".format(total['cosmetics']),
             "{:,}".format(total['supplement']),
             "{:,}".format(total['cosmetics'] + total['supplement']),
-            total['85'] if total['85'] != 0 else '',
-            total['156'] if total['156'] != 0 else '',
-            total['157'] if total['157'] != 0 else '',
-            total['158'] if total['158'] != 0 else '',
-            total['914'] if total['914'] != 0 else '',
-            total['915'] if total['915'] != 0 else '',
-            total['916'] if total['916'] != 0 else '',
+            total['georina'] if total['georina'] != 0 else '',
+            total['soap'] if total['soap'] != 0 else '',
+            total['pack'] if total['pack'] != 0 else '',
+            total['lotion'] if total['lotion'] != 0 else '',
+            total['big_lotion'] if total['big_lotion'] != 0 else '',
+            total['essence'] if total['essence'] != 0 else '',
+            total['set3'] if total['set3'] != 0 else '',
+            total['best4'] if total['best4'] != 0 else '',
         ]
         writer = csv.writer(f)
         writer.writerow(header)
