@@ -367,4 +367,13 @@ SCHEME = {
     '601': {'name': 'スカルプエッセンス', 'type': 'cosmetics'},
     '4001': {'name': 'アルソア リップスティックPINK', 'type': 'cosmetics'},
     '4002': {'name': 'アルソア リップスティックRED', 'type': 'cosmetics'},
+    '440595': {'name': '2022アルソアカレンダー(壁掛け)', 'type': 'promotion'},
+    '440602': {'name': '2022アルソアカレンダー(卓上)', 'type': 'promotion'},
+    '440230': {'name': 'ダイアリー(オレンジ)', 'type': 'promotion'},
+    '440256': {'name': 'ダイアリー(ブラウン)', 'type': 'promotion'},
+    '421347': {'name': 'ハンカチタオル(さくら)', 'type': 'promotion'},
+    '421355': {'name': 'ハンカチタオル(アイリス)', 'type': 'promotion'},
+    '82': {'name': '白鶴霊芝ティ', 'type': 'supplement'},
+    '96': {'name': 'ライフォリジンミネラル', 'type': 'supplement'},
+    '97': {'name': 'ライフォリジンオメガ3', 'type': 'supplement'},
 }
