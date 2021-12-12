@@ -376,4 +376,10 @@ SCHEME = {
     '82': {'name': '白鶴霊芝ティ', 'type': 'supplement'},
     '96': {'name': 'ライフォリジンミネラル', 'type': 'supplement'},
     '97': {'name': 'ライフォリジンオメガ3', 'type': 'supplement'},
+    '83': {'name': '酵素G', 'type': 'supplement'},
+    '1083': {'name': '酵素G(テンプ)', 'type': 'promotion'},
+    '1096': {'name': 'ライフォリジンミネラル(テンプ)', 'type': 'promotion'},
+    '1097': {'name': 'ライフォリジンオメガ3(テンプ)', 'type': 'promotion'},
+    '43480': {'name': 'ファンデーション3日トライアルセット', 'type': 'promotion'},
+    '440248': {'name': 'ダイアリー(ブルー)', 'type': 'promotion'},
 }
