@@ -382,4 +382,5 @@ SCHEME = {
     '1097': {'name': 'ライフォリジンオメガ3(テンプ)', 'type': 'promotion'},
     '43480': {'name': 'ファンデーション3日トライアルセット', 'type': 'promotion'},
     '440248': {'name': 'ダイアリー(ブルー)', 'type': 'promotion'},
+    '440280': {'name': '年賀状2022', 'type': 'promotion'},
 }
