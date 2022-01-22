@@ -1,18 +1,30 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import os
 import re
+import sys
 
 import pandas as pd
 
 from . import products
 
-SUMMARIZED_SOURCE_FILE = 'resources/r_by_customer.csv'
 SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
 
 
 def main():
-    handle(SUMMARIZED_SOURCE_FILE)
+    args = sys.argv
+
+    if len(args) != 2:
+        print('集計するファイルを1ファイル指定してください')
+        quit()
+
+    file_path = args[1]
+    if os.path.isfile(file_path) is False:
+        print('集計するファイルが存在しません')
+        quit()
+
+    handle(file_path)
 
 
 def handle(filepath):
