@@ -35,7 +35,7 @@ class TestSummarize(unittest.TestCase):
             ('tests/files/summarize/red_invalid_product_code.csv',
              '商品マスタに存在しない商品の売上が計上されています 商品コード: 0987654321'),
             ('tests/files/summarize/red_total_amount_not_match.csv',
-             '合計金額が一致しません BC: 15 得意先B, 上代金額（計算）: 7500, 上代金額（ファイル）: 7501')
+             '合計金額が一致しません BC: 得意先B, 上代金額（計算）: 83700, 上代金額（ファイル）: 83705')
         ]
 
         for test_file, expected in test_cases:
