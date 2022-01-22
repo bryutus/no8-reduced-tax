@@ -101,6 +101,7 @@ def is_ignore_row(name):
 
 
 def number_unformat(price):
+    price = re.sub('^\\(', '-', price)
     return int(re.sub('[^0-9\\-]', '', price))
 
 

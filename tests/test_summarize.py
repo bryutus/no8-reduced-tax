@@ -12,6 +12,7 @@ class TestSummarize(unittest.TestCase):
             ('1,000', 1000),
             ('¥1,500', 1500),
             ('-¥100,000', -100000),
+            ('(30,000)', -30000),
         ]
 
         for number, expected in test_cases:
