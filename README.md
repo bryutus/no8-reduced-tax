@@ -15,5 +15,5 @@ pip install pandas
 
 ```bash
 # Summarize the amounts
-make run
+make run SUMMARIZE_FILE=
 ```
