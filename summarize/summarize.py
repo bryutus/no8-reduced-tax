@@ -30,14 +30,16 @@ def main():
 def handle(filepath):
     df = pd.read_csv(filepath,
                      header=0,
-                     usecols=[0, 1, 4, 8, 9],
+                     usecols=[0, 1, 2, 5, 9, 10],
                      names=[
+                         'bc_code',
                          'name',
                          'product_code',
                          'quantity',
                          'retail_amount',
                          'total_retail_amount'],
                      dtype={
+                         'bc_code': 'unicode',
                          'name': 'unicode',
                          'product_code': 'unicode',
                      },
@@ -67,6 +69,7 @@ def handle(filepath):
         if is_counting is False:
             is_counting = True
             summarized['name'] = row['name']
+            summarized['bc_code'] = row['bc_code']
             continue
 
         if pd.notnull(row['total_retail_amount']):
@@ -93,6 +96,7 @@ def handle(filepath):
 def reset_summarized():
     skeleton = {
         'name': '',
+        'bc_code': '',
         'amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
         'quantity': {'georina': 0, 'soap': 0, 'pack': 0, 'lotion': 0, 'big_lotion': 0, 'essence': 0, 'set3': 0, 'best4': 0, },
     }
@@ -158,10 +162,11 @@ def validate_total_amount(summarized, row_amount):
     calculated_amount = total_amount(summarized['amount'])
     row_amount = number_unformat(row_amount)
     if calculated_amount != row_amount:
-        raise Exception('合計金額が一致しません BC: {name}, '
+        raise Exception('合計金額が一致しません BC: {bc_code} {name}, '
                         '上代金額（計算）: {calculated_amount}, '
                         '上代金額（ファイル）: {row_amount}'
                         .format(name=summarized['name'],
+                                bc_code=summarized['bc_code'],
                                 calculated_amount=calculated_amount,
                                 row_amount=row_amount))
 
@@ -174,7 +179,8 @@ def total_amount(amount):
 
 
 def add_body(body, summarized):
-    body.append([summarized['name'],
+    body.append([summarized['bc_code'],
+                 summarized['name'],
                  "{:,}".format(summarized['amount']['cosmetics']),
                  "{:,}".format(summarized['amount']['supplement']),
                  "{:,}".format(
@@ -211,6 +217,7 @@ def sum_total(total, amount, quantity):
 def write_csv(body, total):
     with open(SUMMARIZED_FILE, 'w') as f:
         header = [
+            'BCコード',
             '得意先名',
             '化粧品',
             '健食',
@@ -225,6 +232,7 @@ def write_csv(body, total):
             'ベスト4',
         ]
         footer = [
+            '',
             '合計',
             "{:,}".format(total['cosmetics']),
             "{:,}".format(total['supplement']),
