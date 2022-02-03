@@ -1,25 +1,48 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import os
 import re
+import sys
 
 import pandas as pd
 
 from . import products
 
-SUMMARIZED_SOURCE_FILE = 'resources/r_by_customer.csv'
 SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
 
 
 def main():
-    handle(SUMMARIZED_SOURCE_FILE)
+    args = sys.argv
+
+    if len(args) != 2:
+        print('集計するファイルを1ファイル指定してください')
+        quit()
+
+    file_path = args[1]
+    if os.path.isfile(file_path) is False:
+        print('集計するファイルが存在しません')
+        quit()
+
+    handle(file_path)
 
 
 def handle(filepath):
     df = pd.read_csv(filepath,
-                     header=None,
-                     usecols=[0, 4, 6],
-                     names=['name', 'quantity', 'retail_amount'],
+                     header=0,
+                     usecols=[0, 1, 2, 5, 9, 10],
+                     names=[
+                         'bc_code',
+                         'name',
+                         'product_code',
+                         'quantity',
+                         'retail_amount',
+                         'total_retail_amount'],
+                     dtype={
+                         'bc_code': 'unicode',
+                         'name': 'unicode',
+                         'product_code': 'unicode',
+                     },
                      skipinitialspace=True)
 
     body = []
@@ -40,16 +63,17 @@ def handle(filepath):
 
     df.dropna(how='all')
     for index, row in df.iterrows():
-        if is_ignore_row(row['name']) is not None:
+        if is_ignore_row(row):
             continue
 
         if is_counting is False:
             is_counting = True
             summarized['name'] = row['name']
+            summarized['bc_code'] = row['bc_code']
             continue
 
-        if row['name'] == '【  得意先計  】':
-            validate_total_amount(summarized, row['retail_amount'])
+        if pd.notnull(row['total_retail_amount']):
+            validate_total_amount(summarized, row['total_retail_amount'])
             body = add_body(body, summarized)
             total = sum_total(
                 total,
@@ -59,13 +83,12 @@ def handle(filepath):
             is_counting, summarized = reset_summarized()
             continue
 
-        product_code = extract_product_code(row['name'])
-        validate_exists_product(product_code)
+        validate_exists_product(row['product_code'])
 
-        product = products.SCHEME[product_code]
+        product = products.SCHEME[row['product_code']]
         summarized = sumup(summarized, product['type'], row['retail_amount'])
         summarized = sumup_quantity(
-            summarized, product_code, int(float(row['quantity'])))
+            summarized, row['product_code'], int(float(row['quantity'])))
 
     write_csv(body, total)
 
@@ -73,6 +96,7 @@ def handle(filepath):
 def reset_summarized():
     skeleton = {
         'name': '',
+        'bc_code': '',
         'amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
         'quantity': {'georina': 0, 'soap': 0, 'pack': 0, 'lotion': 0, 'big_lotion': 0, 'essence': 0, 'set3': 0, 'best4': 0, },
     }
@@ -80,15 +104,13 @@ def reset_summarized():
     return (False, skeleton)
 
 
-def is_ignore_row(name):
-    if pd.isnull(name):
-        return name
-
-    return re.match('^[期間\\s.+|得意先コード 得意先名|商品コード 商品名]|【  合  計  】',
-                    name)
+def is_ignore_row(row):
+    return pd.isnull(row['name']) and pd.isnull(
+        row['product_code']) and pd.isnull(row['total_retail_amount'])
 
 
 def number_unformat(price):
+    price = re.sub('^\\(', '-', price)
     return int(re.sub('[^0-9\\-]', '', price))
 
 
@@ -129,13 +151,6 @@ def sumup_quantity(summarized, code, quantity):
     return summarized
 
 
-def extract_product_code(name):
-    matched = re.match('^([0-9]+)\\s.+', name)
-    if matched is None:
-        return 'none'
-    return matched.group(1)
-
-
 def validate_exists_product(code):
     if code not in products.SCHEME:
         raise Exception(
@@ -147,10 +162,11 @@ def validate_total_amount(summarized, row_amount):
     calculated_amount = total_amount(summarized['amount'])
     row_amount = number_unformat(row_amount)
     if calculated_amount != row_amount:
-        raise Exception('合計金額が一致しません BC: {name}, '
+        raise Exception('合計金額が一致しません BC: {bc_code} {name}, '
                         '上代金額（計算）: {calculated_amount}, '
                         '上代金額（ファイル）: {row_amount}'
                         .format(name=summarized['name'],
+                                bc_code=summarized['bc_code'],
                                 calculated_amount=calculated_amount,
                                 row_amount=row_amount))
 
@@ -163,9 +179,8 @@ def total_amount(amount):
 
 
 def add_body(body, summarized):
-    bc = parse_bc(summarized['name'])
-    body.append([bc.group(1),
-                 bc.group(2),
+    body.append([summarized['bc_code'],
+                 summarized['name'],
                  "{:,}".format(summarized['amount']['cosmetics']),
                  "{:,}".format(summarized['amount']['supplement']),
                  "{:,}".format(
@@ -181,13 +196,6 @@ def add_body(body, summarized):
     ])
 
     return body
-
-
-def parse_bc(bc):
-    matched = re.match('^([0-9]+)\\s(.+)', bc)
-    if matched is None:
-        return ''
-    return matched
 
 
 def sum_total(total, amount, quantity):
@@ -209,7 +217,7 @@ def sum_total(total, amount, quantity):
 def write_csv(body, total):
     with open(SUMMARIZED_FILE, 'w') as f:
         header = [
-            '得意先コード',
+            'BCコード',
             '得意先名',
             '化粧品',
             '健食',
