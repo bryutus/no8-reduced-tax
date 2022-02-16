@@ -30,7 +30,7 @@ def main():
 def handle(filepath):
     df = pd.read_csv(filepath,
                      header=0,
-                     usecols=[0, 1, 2, 5, 9, 10],
+                     usecols=[3, 4, 5, 8, 12, 13],
                      names=[
                          'bc_code',
                          'name',
