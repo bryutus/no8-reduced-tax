@@ -384,4 +384,5 @@ SCHEME = {
     '440248': {'name': 'ダイアリー(ブルー)', 'type': 'promotion'},
     '440280': {'name': '年賀状2022', 'type': 'promotion'},
     '1087': {'name': '', 'type': 'promotion'},
+    '441387': {'name': 'ポイントメイク　先行プロモーション', 'type': 'cosmetics'},
 }
