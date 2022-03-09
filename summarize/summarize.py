@@ -244,7 +244,7 @@ def sum_total(total, summarized):
 
 
 def write_csv(body, total):
-    with open(SUMMARIZED_FILE, 'w', encoding='shift_jis') as f:
+    with open(SUMMARIZED_FILE, 'w') as f:
         header = [
             'BCコード',
             '得意先名',
