@@ -416,4 +416,6 @@ SCHEME = {
     '974': {'name': 'ハートコレクション💛ロングマスカラ', 'type': 'cosmetics'},
     '975': {'name': 'アルソアポイントファンデーション', 'type': 'cosmetics'},
     '99': {'name': '替えコットンパフ', 'type': 'cosmetics'},
+    '432352': {'name': 'AQSミニチュアサンプル　NEW', 'type': 'promotion'},
+    '691': {'name': 'リップブラシ', 'type': 'cosmetics'},
 }
