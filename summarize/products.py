@@ -419,4 +419,5 @@ SCHEME = {
     '432352': {'name': 'AQSミニチュアサンプル　NEW', 'type': 'promotion'},
     '691': {'name': 'リップブラシ', 'type': 'cosmetics'},
     '9999': {'name': 'コチャママクックスター', 'type': 'promotion'},
+    '55555': {'name': 'BC先行ベースメイクセット', 'type': 'cosmetics'},
 }
