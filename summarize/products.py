@@ -445,4 +445,9 @@ SCHEME = {
     '116': {'name': '替えパフ（FP)', 'type': 'cosmetics'},
     '998': {'name': 'フェイスパウダーリフィル', 'type': 'cosmetics'},
     '105': {'name': 'リキッドF05', 'type': 'cosmetics'},
+    '114': {'name': '替えスポンジ（PF)', 'type': 'cosmetics'},
+    '443507': {'name': 'パウダーブラシ', 'type': 'promotion'},
+    '443789': {'name': '年賀状2023', 'type': 'promotion'},
+    '995': {'name': 'フェイスパウダー本体', 'type': 'cosmetics'},
+    '996': {'name': 'プレストパウダーリフィル', 'type': 'cosmetics'},
 }
