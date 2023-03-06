@@ -450,4 +450,6 @@ SCHEME = {
     '443789': {'name': '年賀状2023', 'type': 'promotion'},
     '995': {'name': 'フェイスパウダー本体', 'type': 'cosmetics'},
     '996': {'name': 'プレストパウダーリフィル', 'type': 'cosmetics'},
+    '650': {'name': 'ポイントメイクリニューアルセット〈BC先行〉', 'type': 'cosmetics'},
+    '129': {'name': 'シルキーパウダーF24', 'type': 'cosmetics'},
 }
