@@ -452,4 +452,11 @@ SCHEME = {
     '996': {'name': 'プレストパウダーリフィル', 'type': 'cosmetics'},
     '650': {'name': 'ポイントメイクリニューアルセット〈BC先行〉', 'type': 'cosmetics'},
     '129': {'name': 'シルキーパウダーF24', 'type': 'cosmetics'},
+    '978': {'name': 'リベストナチュラルロングﾏｽｶﾗ', 'type': 'cosmetics'},
+    '9998': {'name': 'コチャママスパピュア', 'type': 'promotion'},
+    '979': {'name': 'リベストリップグロスｼｬｲﾆｰｸﾘｱ', 'type': 'cosmetics'},
+    '983': {'name': 'リベストｱｲﾗｲﾅｰ　ﾎﾙﾀﾞｰ', 'type': 'cosmetics'},
+    '984': {'name': 'リベストｱｲﾗｲﾅｰ　ﾘﾌｨﾙ　50ブラウン', 'type': 'cosmetics'},
+    '980': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾎﾙﾀﾞｰ', 'type': 'cosmetics'},
+    '981': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾘﾌｨﾙ　55ブラウン', 'type': 'cosmetics'},
 }
