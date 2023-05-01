@@ -459,4 +459,9 @@ SCHEME = {
     '984': {'name': 'リベストｱｲﾗｲﾅｰ　ﾘﾌｨﾙ　50ブラウン', 'type': 'cosmetics'},
     '980': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾎﾙﾀﾞｰ', 'type': 'cosmetics'},
     '981': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾘﾌｨﾙ　55ブラウン', 'type': 'cosmetics'},
+    '985': {'name': 'リベストｱｲﾗｲﾅｰ　ﾘﾌｨﾙ　51グレー', 'type': 'cosmetics'},
+    '976': {'name': 'リベストアイブロウパウダー', 'type': 'cosmetics'},
+    '986': {'name': 'リベストﾘｷｯﾄﾞｱｲﾗｲﾅｰ', 'type': 'cosmetics'},
+    '977': {'name': 'リベストアイブロウパウダーﾘﾌｨﾙ', 'type': 'cosmetics'},
+    '982': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾘﾌｨﾙ　56グレー', 'type': 'cosmetics'},
 }
