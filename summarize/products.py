@@ -466,4 +466,8 @@ SCHEME = {
     '982': {'name': 'リベストｱｲﾌﾞﾛｳ　ﾘﾌｨﾙ　56グレー', 'type': 'cosmetics'},
     '888': {'name': 'ハーモニーケース', 'type': 'promotion'},
     '1115': {'name': 'ﾘｷｯﾄﾞヴェール　テスター', 'type': 'promotion'},
+    '1011': {'name': 'リキッドF01', 'type': 'cosmetics'},
+    '5556': {'name': 'ブラッシュオンケースnew', 'type': 'promotion'},
+    '5557': {'name': 'リップケースnew', 'type': 'promotion'},
+    '104': {'name': 'リキッドF04', 'type': 'cosmetics'},
 }
