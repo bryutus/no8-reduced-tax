@@ -470,4 +470,9 @@ SCHEME = {
     '5556': {'name': 'ブラッシュオンケースnew', 'type': 'promotion'},
     '5557': {'name': 'リップケースnew', 'type': 'promotion'},
     '104': {'name': 'リキッドF04', 'type': 'cosmetics'},
+    '23978': {'name': 'NWフィール', 'type': 'cosmetics'},
+    '1025': {'name': 'カスタムパレット', 'type': 'promotion'},
+    '23977': {'name': 'CNプレジャー', 'type': 'cosmetics'},
+    '444737': {'name': 'リキッドFナチュラル　テスター', 'type': 'promotion'},
+    '900052': {'name': '美肌コットン', 'type': 'promotion'},
 }
