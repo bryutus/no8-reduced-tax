@@ -475,4 +475,7 @@ SCHEME = {
     '23977': {'name': 'CNプレジャー', 'type': 'cosmetics'},
     '444737': {'name': 'リキッドFナチュラル　テスター', 'type': 'promotion'},
     '900052': {'name': '美肌コットン', 'type': 'promotion'},
+    '447640': {'name': '2024年年賀状', 'type': 'promotion'},
+    '3': {'name': '2024年カレンダー壁掛け', 'type': 'promotion'},
+    '4': {'name': '2024年カレンダー卓上', 'type': 'promotion'},
 }
