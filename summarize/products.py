@@ -15,7 +15,7 @@ SCHEME = {
     '111': {'name': 'AFC会費', 'type': 'promotion'},
     '1111': {'name': 'リキッドファンデーションヴェール１１', 'type': 'cosmetics'},
     '11111': {'name': 'ビューラー', 'type': 'promotion'},
-    '112': {'name': 'リベストスポンジパフケース付', 'type': 'cosmetics'},
+    '112': {'name': 'リベストスポンジパフケース付', 'type': 'promotion'},
     '1120': {'name': 'アルソアクィーンシルバー', 'type': 'cosmetics'},
     '1121': {'name': 'ローションII', 'type': 'cosmetics'},
     '1124': {'name': 'エッセンスII', 'type': 'cosmetics'},
