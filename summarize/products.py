@@ -383,7 +383,7 @@ SCHEME = {
     '89': {'name': 'ジオリナ 霊芝 (ラージ)', 'type': 'supplement'},
     '90': {'name': 'ジオリナ 白鶴霊芝 AG', 'type': 'supplement'},
     '900': {'name': '送料', 'type': 'promotion'},
-    '900041': {'name': '9.2ブロウブラシ(大)', 'type': 'cosmetics'},
+    '900041': {'name': '9.2ブロウブラシ(大)', 'type': 'promotion'},
     '900042': {'name': 'B-5ブロウブラシ(小)', 'type': 'cosmetics'},
     '91': {'name': 'ジオリナ 白鶴霊芝 EX(レギュラー)', 'type': 'supplement'},
     '914': {'name': 'ベスト4アルソアセットI', 'type': 'cosmetics'},
@@ -484,4 +484,7 @@ SCHEME = {
     '447632': {'name': 'ダイアリー2024', 'type': 'promotion'},
     '1712': {'name': 'No,2チークブラシ', 'type': 'promotion'},
     '185': {'name': '', 'type': 'promotion'},
+    '900045': {'name': '#10タイプ（ギンキャップ付き）', 'type': 'promotion'},
+    '447707': {'name': '美顔タオル（ピンク）', 'type': 'promotion'},
+    '900046': {'name': 'ACL5リップ（キャップ付き）', 'type': 'promotion'},
 }
