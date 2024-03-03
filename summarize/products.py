@@ -487,4 +487,11 @@ SCHEME = {
     '900045': {'name': '#10タイプ（ギンキャップ付き）', 'type': 'promotion'},
     '447707': {'name': '美顔タオル（ピンク）', 'type': 'promotion'},
     '900046': {'name': 'ACL5リップ（キャップ付き）', 'type': 'promotion'},
+    '900034': {'name': 'ﾊﾟｳﾀﾞｰブラシ（チーク）白', 'type': 'promotion'},
+    '900036': {'name': 'アイシャドウ（マル斜め）', 'type': 'promotion'},
+    '900037': {'name': 'CS4アイシャドウ　つくし', 'type': 'promotion'},
+    '900038': {'name': 'アイライン＆リップライン', 'type': 'promotion'},
+    '900055': {'name': 'ソフトケース（M)', 'type': 'promotion'},
+    '447294': {'name': '替えアイシャドウチップ（小）', 'type': 'promotion'},
+    '992': {'name': 'クレセントブラシ', 'type': 'promotion'},
 }
