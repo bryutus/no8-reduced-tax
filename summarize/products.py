@@ -494,4 +494,10 @@ SCHEME = {
     '900055': {'name': 'ソフトケース（M)', 'type': 'promotion'},
     '447294': {'name': '替えアイシャドウチップ（小）', 'type': 'promotion'},
     '992': {'name': 'クレセントブラシ', 'type': 'promotion'},
+    '900035': {'name': 'CS3　アイシャドウ（マルヒラ）', 'type': 'promotion'},
+    '900048': {'name': 'スクリュー', 'type': 'promotion'},
+    '447343': {'name': '新》アイラッシュカラー', 'type': 'promotion'},
+    '900033': {'name': 'チークマルヒラ', 'type': 'promotion'},
+    '900047': {'name': 'CS８タイプ', 'type': 'promotion'},
+    '900049': {'name': '眉ブラシ（小）', 'type': 'promotion'},
 }
