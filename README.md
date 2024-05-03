@@ -4,14 +4,20 @@
 
 ## Requirement
 
-- Python 3.9.0
-- pandas 1.1.4
+- Python: ^3.9
+- pandas: ^1.1.4
 
-## Installation
+## Running Locally
 
 ```bash
-pip install pandas
+pip3 install pandas
 ```
+
+### with VS Code
+
+1. Install Extension [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+2. Open VS Code Command Palette
+3. Use the `Dev Containers: Reopen in Container` command
 
 ## Usage
 
