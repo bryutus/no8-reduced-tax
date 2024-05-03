@@ -500,4 +500,8 @@ SCHEME = {
     '900033': {'name': 'チークマルヒラ', 'type': 'promotion'},
     '900047': {'name': 'CS８タイプ', 'type': 'promotion'},
     '900049': {'name': '眉ブラシ（小）', 'type': 'promotion'},
+    '655': {'name': 'リナカンC', 'type': 'supplement'},
+    '1051': {'name': '酵素ミニ', 'type': 'promotion'},
+    '1059': {'name': 'ビエッセS添付', 'type': 'promotion'},
+    '59': {'name': 'ビエッセS', 'type': 'supplement'},
 }
