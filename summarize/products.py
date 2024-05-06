@@ -282,7 +282,7 @@ SCHEME = {
     '49': {'name': 'ソナディスポーテ ローション', 'type': 'cosmetics'},
     '5': {'name': 'リベストマスカラ', 'type': 'cosmetics'},
     '50': {'name': 'ソナディスポーテ エッセンス', 'type': 'cosmetics'},
-    '51': {'name': 'スクワランオイル エス', 'type': 'cosmetics'},
+    '51': {'name': '酵素', 'type': 'supplement'},
     '52': {'name': 'セルジェル', 'type': 'cosmetics'},
     '53': {'name': 'セルアクアマスク', 'type': 'cosmetics'},
     '54': {'name': 'フェイシャルエッセンスマスク', 'type': 'cosmetics'},
