@@ -284,7 +284,7 @@ SCHEME = {
     '50': {'name': 'ソナディスポーテ エッセンス', 'type': 'cosmetics'},
     '51': {'name': '酵素', 'type': 'supplement'},
     '52': {'name': 'セルジェル', 'type': 'cosmetics'},
-    '53': {'name': 'セルアクアマスク', 'type': 'cosmetics'},
+    '53': {'name': '酵素プラスラージ', 'type': 'supplement'},
     '54': {'name': 'フェイシャルエッセンスマスク', 'type': 'cosmetics'},
     '55': {'name': 'モイスチャージェル', 'type': 'cosmetics'},
     '555': {'name': 'ファンデーションテスター', 'type': 'promotion'},
