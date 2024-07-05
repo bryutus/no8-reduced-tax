@@ -519,4 +519,5 @@ SCHEME = {
     '1053': {'name': '酵素プラス添付', 'type': 'promotion'},
     '698': {'name': 'アルソアピュアカル', 'type': 'supplement'},
     '56': {'name': '白鶴霊芝エクストラ30', 'type': 'supplement'},
+    '1056': {'name': '白鶴霊芝エクストラ添付', 'type': 'promotion'},
 }
