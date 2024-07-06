@@ -114,8 +114,6 @@ SCHEME = {
     '322': {'name': 'ブラッシュオンシャイン 622(ピュアホワイト', 'type': 'cosmetics'},
     '323': {'name': 'ブラッシュオンシャイン 623', 'type': 'cosmetics'},
     '329806': {'name': 'コチャママ クックスター', 'type': 'promotion'},
-    '3352': {'name': 'カストマーズカード', 'type': 'promotion'},
-    '3362': {'name': 'コミュニケーションシート', 'type': 'promotion'},
     '3394': {'name': 'ギフトBOB(AQS)バラ売り', 'type': 'promotion'},
     '339409': {'name': 'ギフトBOX(AQS)', 'type': 'promotion'},
     '350368': {'name': 'プレペアローション ミニチュアサンプル', 'type': 'promotion'},
