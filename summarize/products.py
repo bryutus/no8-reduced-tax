@@ -374,7 +374,6 @@ SCHEME = {
     '81': {'name': 'リナカン茶W', 'type': 'supplement'},
     '82': {'name': '白鶴霊芝ティ', 'type': 'supplement'},
     '83': {'name': '酵素G', 'type': 'supplement'},
-    '85': {'name': 'ジオリナ 酵素', 'type': 'supplement'},
     '86': {'name': 'ジオリナ 酵素プラス(レギュラー)', 'type': 'supplement'},
     '87': {'name': 'ジオリナ 酵素プラス(ラージ)', 'type': 'supplement'},
     '88': {'name': 'アルソアレイシレギュラー', 'type': 'supplement'},

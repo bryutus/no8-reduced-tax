@@ -146,7 +146,7 @@ def sumup(summarized, type, selling_amount, retail_amount):
 
 
 def sumup_quantity(summarized, code, quantity):
-    if code == '85':
+    if code == '51':
         summarized['quantity']['georina'] += quantity
     elif code == '1120':
         summarized['quantity']['soap'] += quantity
