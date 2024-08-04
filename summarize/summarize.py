@@ -11,6 +11,16 @@ from . import products
 
 SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
 
+PRODUCT_CODES = {
+    'georina': ['51'],
+    'soap': ['1120'],
+    'pack': ['1130'],
+    'lotion': ['1121', '1131', '1141', '49'],
+    'big_lotion': ['917', '918', '919'],
+    'essence': ['1124', '1134', '1144', '50'],
+    'set3': ['156', '157', '158'],
+    'best4': ['914', '915', '916'],
+}
 
 def main():
     args = sys.argv
@@ -146,21 +156,21 @@ def sumup(summarized, type, selling_amount, retail_amount):
 
 
 def sumup_quantity(summarized, code, quantity):
-    if code == '51':
+    if code in PRODUCT_CODES['georina']:
         summarized['quantity']['georina'] += quantity
-    elif code == '1120':
+    elif code in PRODUCT_CODES['soap']:
         summarized['quantity']['soap'] += quantity
-    elif code == '1130':
+    elif code in PRODUCT_CODES['pack']:
         summarized['quantity']['pack'] += quantity
-    elif code in ['1121', '1131', '1141', '49', ]:
+    elif code in PRODUCT_CODES['lotion']:
         summarized['quantity']['lotion'] += quantity
-    elif code in ['917', '918', '919', ]:
+    elif code in PRODUCT_CODES['big_lotion']:
         summarized['quantity']['big_lotion'] += quantity
-    elif code in ['1124', '1134', '1144', '50', ]:
+    elif code in PRODUCT_CODES['essence']:
         summarized['quantity']['essence'] += quantity
-    elif code in ['156', '157', '158', ]:
+    elif code in PRODUCT_CODES['set3']:
         summarized['quantity']['set3'] += quantity
-    elif code in ['914', '915', '916', ]:
+    elif code in PRODUCT_CODES['best4']:
         summarized['quantity']['best4'] += quantity
 
     return summarized
@@ -252,14 +262,14 @@ def write_csv(body, total):
             '健食',
             '販促',
             '合計',
-            '酵素',
-            '石鹸',
-            'パック',
-            'ローション',
-            'ビッグローション',
-            'エッセンス',
-            'セット3',
-            'ベスト4',
+            '酵素（製品コード：' + '/'.join(PRODUCT_CODES['georina']) + '）',
+            '石鹸（製品コード：' + '/'.join(PRODUCT_CODES['soap']) + '）',
+            'パック（製品コード：' + '/'.join(PRODUCT_CODES['pack']) + '）',
+            'ローション（製品コード：' + '/'.join(PRODUCT_CODES['lotion']) + '）',
+            'ビッグローション（製品コード：' + '/'.join(PRODUCT_CODES['big_lotion']) + '）',
+            'エッセンス（製品コード：' + '/'.join(PRODUCT_CODES['essence']) + '）',
+            'セット3（製品コード：' + '/'.join(PRODUCT_CODES['set3']) + '）',
+            'ベスト4（製品コード：' + '/'.join(PRODUCT_CODES['best4']) + '）',
         ]
         footer = [
             '',
