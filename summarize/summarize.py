@@ -4,6 +4,7 @@ import csv
 import os
 import re
 import sys
+from typing import List, Dict, Tuple, Any, Union
 
 import pandas as pd
 
@@ -11,7 +12,7 @@ from . import products
 
 SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
 
-PRODUCT_CODES = {
+PRODUCT_CODES: Dict[str, List[str]] = {
     'georina': ['51'],
     'soap': ['1120'],
     'pack': ['1130'],
@@ -22,7 +23,7 @@ PRODUCT_CODES = {
     'best4': ['914', '915', '916'],
 }
 
-def main():
+def main() -> None:
     args = sys.argv
 
     if len(args) != 2:
@@ -37,7 +38,7 @@ def main():
     handle(file_path)
 
 
-def handle(filepath):
+def handle(filepath: str) -> None:
     df = pd.read_csv(filepath,
                      header=0,
                      usecols=[3, 4, 5, 8, 10, 11, 12, 13],
@@ -57,8 +58,8 @@ def handle(filepath):
                      },
                      skipinitialspace=True)
 
-    body = []
-    total = {
+    body: List[List[Any]] = []
+    total: Dict[str, int] = {
         'cosmetics': 0,
         'supplement': 0,
         'promotion': 0,
@@ -113,8 +114,8 @@ def handle(filepath):
     write_csv(body, total)
 
 
-def reset_summarized():
-    skeleton = {
+def reset_summarized() -> Tuple[bool, Dict[str, Any]]:
+    skeleton: Dict[str, Any] = {
         'name': '',
         'bc_code': '',
         'selling_amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
@@ -125,17 +126,17 @@ def reset_summarized():
     return (False, skeleton)
 
 
-def is_ignore_row(row):
+def is_ignore_row(row: pd.Series) -> bool:
     return pd.isnull(row['name']) and pd.isnull(
         row['product_code']) and pd.isnull(row['total_retail_amount'])
 
 
-def number_unformat(price):
+def number_unformat(price: str) -> int:
     price = re.sub('^\\(', '-', price)
     return int(re.sub('[^0-9\\-]', '', price))
 
 
-def sumup(summarized, type, selling_amount, retail_amount):
+def sumup(summarized: Dict[str, Any], type: str, selling_amount: str, retail_amount: str) -> Dict[str, Any]:
     unformated_retail_amount = number_unformat(retail_amount)
     unformated_selling_amount = number_unformat(selling_amount)
 
@@ -155,7 +156,7 @@ def sumup(summarized, type, selling_amount, retail_amount):
     return summarized
 
 
-def sumup_quantity(summarized, code, quantity):
+def sumup_quantity(summarized: Dict[str, Any], code: str, quantity: int) -> Dict[str, Any]:
     if code in PRODUCT_CODES['georina']:
         summarized['quantity']['georina'] += quantity
     elif code in PRODUCT_CODES['soap']:
@@ -176,47 +177,47 @@ def sumup_quantity(summarized, code, quantity):
     return summarized
 
 
-def validate_exists_product(code):
+def validate_exists_product(code: str) -> None:
     if code not in products.SCHEME:
         raise Exception(
             '商品マスタに存在しない商品の売上が計上されています 商品コード: {product_code}'.format(
                 product_code=code))
 
 
-def validate_selling_retail_amount(summarized, row_amount):
+def validate_selling_retail_amount(summarized: Dict[str, Any], row_amount: str) -> None:
     calculated_amount = total_amount(summarized['selling_amount'])
-    row_amount = number_unformat(row_amount)
-    if calculated_amount != row_amount:
+    unformatted = number_unformat(row_amount)
+    if calculated_amount != unformatted:
         raise Exception('売価金額合計が一致しません BC: {bc_code} {name}, '
                         '売価金額（計算）: {calculated_amount}, '
                         '売価金額（ファイル）: {row_amount}'
                         .format(name=summarized['name'],
                                 bc_code=summarized['bc_code'],
                                 calculated_amount=calculated_amount,
-                                row_amount=row_amount))
+                                row_amount=unformatted))
 
 
-def validate_total_retail_amount(summarized, row_amount):
+def validate_total_retail_amount(summarized: Dict[str, Any], row_amount: str) -> None:
     calculated_amount = total_amount(summarized['retail_amount'])
-    row_amount = number_unformat(row_amount)
-    if calculated_amount != row_amount:
+    unformatted = number_unformat(row_amount)
+    if calculated_amount != unformatted:
         raise Exception('上代金額合計が一致しません BC: {bc_code} {name}, '
                         '上代金額（計算）: {calculated_amount}, '
                         '上代金額（ファイル）: {row_amount}'
                         .format(name=summarized['name'],
                                 bc_code=summarized['bc_code'],
                                 calculated_amount=calculated_amount,
-                                row_amount=row_amount))
+                                row_amount=unformatted))
 
 
-def total_amount(amount):
+def total_amount(amount: Dict[str, int]) -> int:
     total = 0
     for v in amount.values():
         total += v
     return total
 
 
-def add_body(body, summarized):
+def add_body(body: List[List[Any]], summarized: Dict[str, Any]) -> List[List[Any]]:
     body.append([summarized['bc_code'],
                  summarized['name'],
                  "{:,}".format(summarized['retail_amount']['cosmetics']),
@@ -237,7 +238,7 @@ def add_body(body, summarized):
     return body
 
 
-def sum_total(total, summarized):
+def sum_total(total: Dict[str, int], summarized: Dict[str, Any]) -> Dict[str, int]:
     total['cosmetics'] += summarized['retail_amount']['cosmetics']
     total['supplement'] += summarized['retail_amount']['supplement']
     total['promotion'] += summarized['selling_amount']['promotion']
@@ -253,7 +254,7 @@ def sum_total(total, summarized):
     return total
 
 
-def write_csv(body, total):
+def write_csv(body: List[List[Any]], total: Dict[str, int]) -> None:
     with open(SUMMARIZED_FILE, 'w') as f:
         header = [
             'BCコード',
