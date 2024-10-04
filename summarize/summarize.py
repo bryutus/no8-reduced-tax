@@ -211,10 +211,7 @@ def validate_total_retail_amount(summarized: Dict[str, Any], row_amount: str) ->
 
 
 def total_amount(amount: Dict[str, int]) -> int:
-    total = 0
-    for v in amount.values():
-        total += v
-    return total
+    return sum(amount.values())
 
 
 def add_body(body: List[List[Any]], summarized: Dict[str, Any]) -> List[List[Any]]:
