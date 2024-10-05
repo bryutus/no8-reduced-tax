@@ -6,8 +6,6 @@ import re
 import sys
 from typing import List, Dict, Tuple, Any, Union
 
-import pandas as pd
-
 from . import products
 
 SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
@@ -22,6 +20,19 @@ PRODUCT_CODES: Dict[str, List[str]] = {
     'set3': ['156', '157', '158'],
     'best4': ['914', '915', '916'],
 }
+
+COLUMNS: List[str] = [
+    'bc_code',
+    'name',
+    'product_code',
+    'quantity',
+    'selling_amount',
+    'total_selling_amount',
+    'retail_amount',
+    'total_retail_amount'
+]
+
+COLUMN_INDICES: List[int] = [3, 4, 5, 8, 10, 11, 12, 13]
 
 def main() -> None:
     args = sys.argv
@@ -39,24 +50,14 @@ def main() -> None:
 
 
 def handle(filepath: str) -> None:
-    df = pd.read_csv(filepath,
-                     header=0,
-                     usecols=[3, 4, 5, 8, 10, 11, 12, 13],
-                     names=[
-                         'bc_code',
-                         'name',
-                         'product_code',
-                         'quantity',
-                         'selling_amount',
-                         'total_selling_amount',
-                         'retail_amount',
-                         'total_retail_amount'],
-                     dtype={
-                         'bc_code': 'unicode',
-                         'name': 'unicode',
-                         'product_code': 'unicode',
-                     },
-                     skipinitialspace=True)
+    with open(filepath, 'r', encoding='utf-8') as csvfile:
+        next(csvfile)
+        reader = csv.reader(csvfile, skipinitialspace=True)
+        data = []
+        for row in reader:
+            selected_values = [row[i].strip() for i in COLUMN_INDICES]
+            row_dict = dict(zip(COLUMNS, selected_values))
+            data.append(row_dict)
 
     body: List[List[Any]] = []
     total: Dict[str, int] = {
@@ -74,18 +75,17 @@ def handle(filepath: str) -> None:
     }
     is_counting, summarized = reset_summarized()
 
-    df.dropna(how='all')
-    for index, row in df.iterrows():
+    for row in data:
         if is_ignore_row(row):
             continue
 
-        if is_counting is False:
+        if not is_counting:
             is_counting = True
             summarized['name'] = row['name']
             summarized['bc_code'] = row['bc_code']
             continue
 
-        if pd.notnull(row['total_retail_amount']):
+        if row['total_retail_amount']:
             validate_selling_retail_amount(
                 summarized, row['total_selling_amount'])
             validate_total_retail_amount(
@@ -126,9 +126,8 @@ def reset_summarized() -> Tuple[bool, Dict[str, Any]]:
     return (False, skeleton)
 
 
-def is_ignore_row(row: pd.Series) -> bool:
-    return pd.isnull(row['name']) and pd.isnull(
-        row['product_code']) and pd.isnull(row['total_retail_amount'])
+def is_ignore_row(row: Dict[str, str]) -> bool:
+    return not (row['name'] or row['product_code'] or row['total_retail_amount'])
 
 
 def number_unformat(price: str) -> int:
