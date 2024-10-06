@@ -94,8 +94,7 @@ def handle(filepath: str) -> None:
         summarized = sumup(
             summarized,
             product['type'],
-            row['selling_amount'],
-            row['retail_amount'])
+            row)
         summarized = sumup_quantity(
             summarized, row['product_code'], int(float(row['quantity'])))
 
@@ -125,43 +124,23 @@ def number_unformat(price: str) -> int:
     return int(re.sub('[^0-9\\-]', '', price))
 
 
-def sumup(summarized: Dict[str, Any], type: str, selling_amount: str, retail_amount: str) -> Dict[str, Any]:
-    unformated_retail_amount = number_unformat(retail_amount)
-    unformated_selling_amount = number_unformat(selling_amount)
+def sumup(summarized: Dict[str, Any], type: str, row: Dict[str, Any]) -> Dict[str, Any]:
+    unformated_retail_amount = number_unformat(row['retail_amount'])
+    unformated_selling_amount = number_unformat(row['selling_amount'])
 
-    if type == 'cosmetics':
-        summarized['retail_amount']['cosmetics'] += unformated_retail_amount
-        summarized['selling_amount']['cosmetics'] += unformated_selling_amount
-    elif type == 'supplement':
-        summarized['retail_amount']['supplement'] += unformated_retail_amount
-        summarized['selling_amount']['supplement'] += unformated_selling_amount
-    elif type == 'promotion':
-        summarized['retail_amount']['promotion'] += unformated_retail_amount
-        summarized['selling_amount']['promotion'] += unformated_selling_amount
-    else:
-        raise Exception(
-            '定義されていない種別が存在しています 種別: {type}'.format(type=type))
+    if type not in ['cosmetics', 'supplement', 'promotion']:
+        raise Exception('定義されていない種別が存在しています 種別: {t}'.format(t=type))
+
+    summarized['retail_amount'][type] += unformated_retail_amount
+    summarized['selling_amount'][type] += unformated_selling_amount
 
     return summarized
 
-
 def sumup_quantity(summarized: Dict[str, Any], code: str, quantity: int) -> Dict[str, Any]:
-    if code in PRODUCT_CODES['georina']:
-        summarized['quantity']['georina'] += quantity
-    elif code in PRODUCT_CODES['soap']:
-        summarized['quantity']['soap'] += quantity
-    elif code in PRODUCT_CODES['pack']:
-        summarized['quantity']['pack'] += quantity
-    elif code in PRODUCT_CODES['lotion']:
-        summarized['quantity']['lotion'] += quantity
-    elif code in PRODUCT_CODES['big_lotion']:
-        summarized['quantity']['big_lotion'] += quantity
-    elif code in PRODUCT_CODES['essence']:
-        summarized['quantity']['essence'] += quantity
-    elif code in PRODUCT_CODES['set3']:
-        summarized['quantity']['set3'] += quantity
-    elif code in PRODUCT_CODES['best4']:
-        summarized['quantity']['best4'] += quantity
+    for product_type, codes in PRODUCT_CODES.items():
+        if code in codes:
+            summarized['quantity'][product_type] += quantity
+            break
 
     return summarized
 
@@ -225,17 +204,11 @@ def add_body(body: List[List[Any]], summarized: Dict[str, Any]) -> List[List[Any
 
 
 def sum_total(total: Dict[str, int], summarized: Dict[str, Any]) -> Dict[str, int]:
-    total['cosmetics'] += summarized['retail_amount']['cosmetics']
-    total['supplement'] += summarized['retail_amount']['supplement']
     total['promotion'] += summarized['selling_amount']['promotion']
-    total['georina'] += summarized['quantity']['georina']
-    total['soap'] += summarized['quantity']['soap']
-    total['pack'] += summarized['quantity']['pack']
-    total['lotion'] += summarized['quantity']['lotion']
-    total['big_lotion'] += summarized['quantity']['big_lotion']
-    total['essence'] += summarized['quantity']['essence']
-    total['set3'] += summarized['quantity']['set3']
-    total['best4'] += summarized['quantity']['best4']
+    for k in ['cosmetics', 'supplement']:
+        total[k] += summarized['retail_amount'][k]
+    for k in PRODUCT_CODES.keys():
+        total[k] += summarized['quantity'][k]
 
     return total
 
