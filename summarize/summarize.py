@@ -8,7 +8,7 @@ from typing import List, Dict, Tuple, Any, Union
 
 from . import products
 
-SUMMARIZED_FILE = 'resources/summarized_r_by_customer.csv'
+SUMMARIZED_FILE: str = 'resources/summarized_r_by_customer.csv'
 
 PRODUCT_CODES: Dict[str, List[str]] = {
     'georina': ['51'],
