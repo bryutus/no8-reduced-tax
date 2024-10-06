@@ -60,20 +60,8 @@ def handle(filepath: str) -> None:
             data.append(row_dict)
 
     body: List[List[Any]] = []
-    total: Dict[str, int] = {
-        'cosmetics': 0,
-        'supplement': 0,
-        'promotion': 0,
-        'georina': 0,
-        'soap': 0,
-        'pack': 0,
-        'lotion': 0,
-        'big_lotion': 0,
-        'essence': 0,
-        'set3': 0,
-        'best4': 0,
-    }
-    is_counting, summarized = reset_summarized()
+    total = init_total()
+    is_counting, summarized = init_summarized()
 
     for row in data:
         if is_ignore_row(row):
@@ -97,7 +85,7 @@ def handle(filepath: str) -> None:
                 total,
                 summarized)
 
-            is_counting, summarized = reset_summarized()
+            is_counting, summarized = init_summarized()
             continue
 
         validate_exists_product(row['product_code'])
@@ -113,14 +101,16 @@ def handle(filepath: str) -> None:
 
     write_csv(body, total)
 
+def init_total() -> Dict[str, int]:
+    return {k: 0 for k in ['cosmetics', 'supplement', 'promotion', 'georina', 'soap', 'pack', 'lotion', 'big_lotion', 'essence', 'set3', 'best4']}
 
-def reset_summarized() -> Tuple[bool, Dict[str, Any]]:
+def init_summarized() -> Tuple[bool, Dict[str, Any]]:
     skeleton: Dict[str, Any] = {
         'name': '',
         'bc_code': '',
         'selling_amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
         'retail_amount': {'cosmetics': 0, 'supplement': 0, 'promotion': 0, },
-        'quantity': {'georina': 0, 'soap': 0, 'pack': 0, 'lotion': 0, 'big_lotion': 0, 'essence': 0, 'set3': 0, 'best4': 0, },
+        'quantity': {k: 0 for k in ['georina', 'soap', 'pack', 'lotion', 'big_lotion', 'essence', 'set3', 'best4']},
     }
 
     return (False, skeleton)
