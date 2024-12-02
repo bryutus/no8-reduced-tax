@@ -521,4 +521,5 @@ SCHEME = {
     '449': {'name': 'フレッシュフラワーセットCN', 'type': 'cosmetics'},
     '450': {'name': 'フレッシュフラワーセットNW', 'type': 'cosmetics'},
     '423065': {'name': 'ﾘｷｯﾄﾞﾌｧﾝﾃﾞｰｼｮﾝｳﾞｪｰﾙ14MS', 'type': 'promotion'},
+    '449513': {'name': '年賀状2025', 'type': 'promotion'},
 }
