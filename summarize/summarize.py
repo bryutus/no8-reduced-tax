@@ -50,14 +50,19 @@ def main() -> None:
 
 
 def handle(filepath: str) -> None:
-    with open(filepath, 'r', encoding='utf-8') as csvfile:
-        next(csvfile)
-        reader = csv.reader(csvfile, skipinitialspace=True)
-        data = []
-        for row in reader:
-            selected_values = [row[i].strip() for i in COLUMN_INDICES]
-            row_dict = dict(zip(COLUMNS, selected_values))
-            data.append(row_dict)
+    with open(filepath, 'r', encoding='cp932') as f:
+        content = f.read()
+
+    content = content.replace('\r\n', '\n')
+
+    reader = csv.reader(content.splitlines(), skipinitialspace=True)
+    next(reader)
+
+    data = []
+    for row in reader:
+        selected_values = [row[i].strip() for i in COLUMN_INDICES]
+        row_dict = dict(zip(COLUMNS, selected_values))
+        data.append(row_dict)
 
     body: List[List[Any]] = []
     total = init_total()
