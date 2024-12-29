@@ -50,8 +50,11 @@ def main() -> None:
 
 
 def handle(filepath: str) -> None:
-    with open(filepath, 'r', encoding='cp932') as f:
-        content = f.read()
+    try:
+        with open(filepath, 'r', encoding='cp932') as f:
+            content = f.read()
+    except UnicodeDecodeError:
+        raise Exception('ファイルの文字コードがcp932ではありません')
 
     content = content.replace('\r\n', '\n')
 
