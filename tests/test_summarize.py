@@ -22,9 +22,10 @@ class TestSummarize(unittest.TestCase):
     def test_summarize(self):
         test_file = 'tests/files/summarize/green.csv'
         expected_file = 'tests/files/summarize/expected/green.csv'
+        year_month = '202301'
 
         with self.subTest(file=test_file, expected=expected_file):
-            summarize.handle(test_file)
+            summarize.handle(test_file, year_month)
             self.assertTrue(
                 filecmp.cmp(
                     'resources/summarized_r_by_customer.csv',
@@ -42,7 +43,7 @@ class TestSummarize(unittest.TestCase):
 
         for test_file, expected in test_cases:
             with self.assertRaises(Exception) as ex:
-                summarize.handle(test_file)
+                summarize.handle(test_file, '202301')
             actual = ex.exception.args[0]
             with self.subTest(actual=actual, expected=expected):
                 self.assertEqual(actual, expected)
