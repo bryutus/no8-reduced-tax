@@ -5,6 +5,7 @@ import os
 import re
 import sys
 from typing import List, Dict, Tuple, Any, Union
+from datetime import datetime
 
 from . import products
 
@@ -37,19 +38,27 @@ COLUMN_INDICES: List[int] = [3, 4, 5, 8, 10, 11, 12, 13]
 def main() -> None:
     args = sys.argv
 
-    if len(args) != 2:
-        print('集計するファイルを1ファイル指定してください')
+    if len(args) != 3:
+        print('集計するファイルと年月を指定してください')
         quit()
 
     file_path = args[1]
+    year_month = args[2]
+
     if os.path.isfile(file_path) is False:
         print('集計するファイルが存在しません')
         quit()
 
-    handle(file_path)
+    try:
+        datetime.strptime(year_month, '%Y%m')
+    except ValueError:
+        print('年月の形式が正しくありません。YYYYMMの形式で指定してください')
+        quit()
+
+    handle(file_path, year_month)
 
 
-def handle(filepath: str) -> None:
+def handle(filepath: str, year_month: str) -> None:
     try:
         with open(filepath, 'r', encoding='cp932') as f:
             content = f.read()
@@ -106,7 +115,7 @@ def handle(filepath: str) -> None:
         summarized = sumup_quantity(
             summarized, row['product_code'], int(float(row['quantity'])))
 
-    write_csv(body, total)
+    write_csv(body, total, year_month)
 
 def init_total() -> Dict[str, int]:
     return {k: 0 for k in ['cosmetics', 'supplement', 'promotion', 'georina', 'soap', 'pack', 'lotion', 'big_lotion', 'essence', 'set3', 'best4']}
@@ -221,8 +230,9 @@ def sum_total(total: Dict[str, int], summarized: Dict[str, Any]) -> Dict[str, in
     return total
 
 
-def write_csv(body: List[List[Any]], total: Dict[str, int]) -> None:
+def write_csv(body: List[List[Any]], total: Dict[str, int], year_month: str) -> None:
     with open(SUMMARIZED_FILE, 'w') as f:
+        f.write(f"'{year_month[:4]}年{year_month[4:]}月\r\n")
         header = [
             'BCコード',
             '得意先名',
