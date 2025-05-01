@@ -525,4 +525,5 @@ SCHEME = {
     '447236': {'name': 'チークブラシ', 'type': 'promotion'},
     '447260': {'name': 'No,5アイシャドーブラシ（小）', 'type': 'promotion'},
     '450304': {'name': 'メッシュポーチ（黒）', 'type': 'promotion'},
+    '57': {'name': '白鶴霊芝EXバラ', 'type': 'supplement'},
 }
