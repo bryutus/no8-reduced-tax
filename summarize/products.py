@@ -527,4 +527,9 @@ SCHEME = {
     '450304': {'name': 'メッシュポーチ（黒）', 'type': 'promotion'},
     '57': {'name': '白鶴霊芝EXバラ', 'type': 'supplement'},
     '448078': {'name': '手提げブルーL', 'type': 'promotion'},
+    '1063': {'name': '', 'type': 'promotion'},
+    '320606': {'name': '卓上ミラーロゴ入り', 'type': 'promotion'},
+    '392522': {'name': '洗顔タオルピンク（１０枚）', 'type': 'promotion'},
+    '10467': {'name': 'コチャママヘルシーメイト', 'type': 'promotion'},
+    '1709': {'name': '眉カットハサミ', 'type': 'promotion'},
 }
