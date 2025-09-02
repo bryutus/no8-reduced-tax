@@ -532,4 +532,5 @@ SCHEME = {
     '392522': {'name': '洗顔タオルピンク（１０枚）', 'type': 'promotion'},
     '10467': {'name': 'コチャママヘルシーメイト', 'type': 'promotion'},
     '1709': {'name': '眉カットハサミ', 'type': 'promotion'},
+    '449042': {'name': 'ﾘｷｯﾄﾞﾌｧﾝﾃﾞｰｼｮﾝｳﾞｪｰﾙMS14', 'type': 'promotion'},
 }
