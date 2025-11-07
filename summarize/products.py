@@ -533,5 +533,6 @@ SCHEME = {
     '10467': {'name': 'コチャママヘルシーメイト', 'type': 'promotion'},
     '1709': {'name': '眉カットハサミ', 'type': 'promotion'},
     '449042': {'name': 'ﾘｷｯﾄﾞﾌｧﾝﾃﾞｰｼｮﾝｳﾞｪｰﾙMS14', 'type': 'promotion'},
-    '447690': {'name': 'カスタムパレット', 'type': 'promotion'}
+    '447690': {'name': 'カスタムパレット', 'type': 'promotion'},
+    '12121': {'name': 'ポケットダイアリー2026　グリーン', 'type': 'promotion'}
 }
