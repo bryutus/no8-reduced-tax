@@ -534,5 +534,7 @@ SCHEME = {
     '1709': {'name': '眉カットハサミ', 'type': 'promotion'},
     '449042': {'name': 'ﾘｷｯﾄﾞﾌｧﾝﾃﾞｰｼｮﾝｳﾞｪｰﾙMS14', 'type': 'promotion'},
     '447690': {'name': 'カスタムパレット', 'type': 'promotion'},
-    '12121': {'name': 'ポケットダイアリー2026　グリーン', 'type': 'promotion'}
+    '12121': {'name': 'ポケットダイアリー2026　グリーン', 'type': 'promotion'},
+    '58': {'name': '酵素１week', 'type': 'supplement'},
+    '21212': {'name': '2026年ダイアリー', 'type': 'promotion'},
 }
