@@ -537,4 +537,6 @@ SCHEME = {
     '12121': {'name': 'ポケットダイアリー2026　グリーン', 'type': 'promotion'},
     '58': {'name': '酵素１week', 'type': 'supplement'},
     '21212': {'name': '2026年ダイアリー', 'type': 'promotion'},
+    '446189': {'name': '1替えアイブロウブラシ', 'type': 'promotion'},
+    '447244': {'name': 'NO.3アイシャドーブラシ（大）', 'type': 'promotion'},
 }
