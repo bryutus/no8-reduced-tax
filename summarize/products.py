@@ -540,4 +540,5 @@ SCHEME = {
     '446189': {'name': '1替えアイブロウブラシ', 'type': 'promotion'},
     '447244': {'name': 'NO.3アイシャドーブラシ（大）', 'type': 'promotion'},
     '447633': {'name': 'ダイアリー２０２６', 'type': 'promotion'},
+    '100462': {'name': 'コチャママポット', 'type': 'promotion'},
 }
