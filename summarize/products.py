@@ -544,4 +544,13 @@ SCHEME = {
     '126': {'name': 'ｼﾙｷｰﾊﾟｳﾀﾞｰﾌｧﾝﾃﾞｰｼｮﾝ21本体', 'type': 'cosmetics'},
     '453001': {'name': 'BC先行スキンケア共通セット', 'type': 'cosmetics'},
     '453004': {'name': 'BC先行ベースメイクセットCell', 'type': 'cosmetics'},
+    '252525': {'name': 'ローションⅡMS', 'type': 'promotion'},
+    '252535': {'name': 'ローションⅠMS', 'type': 'promotion'},
+    '252545': {'name': 'セルローションMS', 'type': 'promotion'},
+    '451899': {'name': 'モニターセットⅠ', 'type': 'promotion'},
+    '451906': {'name': 'モニターセットⅡ', 'type': 'promotion'},
+    '451914': {'name': 'モニターセットCELL', 'type': 'promotion'},
+    '37': {'name': 'ジェルオイル', 'type': 'cosmetics'},
+    '453003': {'name': 'BC先行スキンケアセットⅡ', 'type': 'cosmetics'},
+    '610': {'name': 'ボディリペアプラス', 'type': 'cosmetics'},
 }
