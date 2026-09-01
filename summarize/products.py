@@ -564,4 +564,5 @@ SCHEME = {
     '353532': {'name': 'モイストセラムMS', 'type': 'promotion'},
     '353550': {'name': 'エッセンシャルセラムMS', 'type': 'promotion'},
     '353552': {'name': 'ボディリペアプラスMS', 'type': 'promotion'},
+    '450305': {'name': 'メッシュグレイ　トート', 'type': 'promotion'},
 }
